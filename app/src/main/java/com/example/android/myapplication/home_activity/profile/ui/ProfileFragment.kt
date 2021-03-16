@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.widget.addTextChangedListener
 import com.example.android.myapplication.R
 import com.example.android.myapplication.databinding.FragmentProfileBinding
 import com.example.android.myapplication.home_activity.profile.vm.ProfileViewModel
@@ -15,7 +16,7 @@ class ProfileFragment : Fragment() {
     private var _binding: FragmentProfileBinding?=null
     private val binding get() = _binding!!
 
-    private val presenter: ProfileViewModel by viewModel()
+    private val profileViewModel: ProfileViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -28,19 +29,17 @@ class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.btnSaveName.setOnClickListener {
-            presenter.saveName(binding.etName.toString())
+        profileViewModel.profile.observe(viewLifecycleOwner){profileData->
+            binding.etName.setText(profileData.name)
+            binding.etLastName.setText(profileData.lastName)
         }
-
-        presenter.readName()
-
-        binding.btnReadName.setOnClickListener {
-            presenter.savedName.observe(viewLifecycleOwner,{
-                 it.let{
-                     binding.tvSavedName.text = it
-                 }
-            })
+        binding.etName.addTextChangedListener { name->
+            profileViewModel.saveName(name.toString())
+        }
+        binding.etLastName.addTextChangedListener { lastName->
+            profileViewModel.saveLastName(lastName.toString())
         }
     }
+
 
 }

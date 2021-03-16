@@ -58,8 +58,8 @@ fun provideBankDatabase(application: Application): BankDatabase {
     return BankDatabase.getInstance(application)
 }
 
-fun provideProfileDataStore(context: Context):DataStore<Preferences>{
-    return context.createDataStore(name = "firstName")
+fun provideProfileDataStore(application: Application):DataStore<Preferences>{
+    return application.createDataStore(name = "firstName")
 }
 
 fun provideTransactionRepository(retrofit: ITransactionAPI, bankDB: BankDatabase, dataStore: DataStore<Preferences>): TransactionRepository

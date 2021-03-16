@@ -53,17 +53,29 @@ class TransactionRepository(private val api: ITransactionAPI,
     }
     //DataStore Preferences
     //save
-    suspend fun save(value: String) {
-        val dataStoreKey = preferencesKey<String>(Constants.PREFERENCES_NAME_KEY)
-        dataStore.edit { settings ->
-            settings[dataStoreKey] = value
-        }
+    suspend fun saveName(name: String) {
+        saveString(Constants.PREFERENCES_NAME_KEY, name)
+    }
+    suspend fun saveLastName(lastName: String) {
+        saveString(Constants.PREFERENCES_LAST_NAME_KEY, lastName)
     }
     //read
     suspend fun readName(): String? {
         val dataStoreKey = preferencesKey<String>(Constants.PREFERENCES_NAME_KEY)
         val preferences = dataStore.data.first()
         return preferences[dataStoreKey]
+    }
+    suspend fun readLastName(): String? {
+        val dataStoreKey = preferencesKey<String>(Constants.PREFERENCES_LAST_NAME_KEY)
+        val preferences = dataStore.data.first()
+        return preferences[dataStoreKey]
+    }
+
+    private suspend fun saveString (key:String, value: String){
+        val dataStoreKey = preferencesKey<String>(key)
+        dataStore.edit { settings ->
+            settings[dataStoreKey] = value
+        }
     }
 
 }
