@@ -9,6 +9,11 @@ val dataModule = module {
     single { provideGson()}
     single { provideRetrofit( get(), get())}
     single { provideTransactionApi( get() )}
+
     single { provideBankDatabase( get() ) }
-    single { provideTransactionRepository( get(), get() )}
+
+    single { provideProfileDataStore(get()) }
+
+    single { provideTransactionRepository( get(), get(),get())}
+
 }

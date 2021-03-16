@@ -1,6 +1,10 @@
 package com.example.android.data.di.providers
 
 import android.app.Application
+import android.content.Context
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.createDataStore
 import com.example.android.data.BuildConfig
 import com.example.android.data.local.BankDatabase
 import com.example.android.data.remote.ITransactionAPI
@@ -54,5 +58,11 @@ fun provideBankDatabase(application: Application): BankDatabase {
     return BankDatabase.getInstance(application)
 }
 
-fun provideTransactionRepository(retrofit: ITransactionAPI, bankDB: BankDatabase): TransactionRepository
-= TransactionRepository(retrofit, bankDB)
+fun provideProfileDataStore(context: Context):DataStore<Preferences>{
+    return context.createDataStore(name = "firstName")
+}
+
+fun provideTransactionRepository(retrofit: ITransactionAPI, bankDB: BankDatabase, dataStore: DataStore<Preferences>): TransactionRepository
+= TransactionRepository(retrofit, bankDB, dataStore)
+
+
