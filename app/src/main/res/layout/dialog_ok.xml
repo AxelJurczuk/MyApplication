@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/light_gray">
+        <TextView
+            android:id="@+id/tv_dialog_ok_title"
+            style="@style/FontBold.XL"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:background="@color/green"
+            android:padding="@dimen/marginM"
+            android:text="@string/alert"
+            android:textAlignment="center"/>
+
+        <TextView
+            android:id="@+id/tv_dialog_ok_body"
+            style="@style/FontBold.L"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/marginXL"
+            app:layout_constraintBottom_toTopOf="@id/dialog_ok_button"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_dialog_ok_title" />
+
+        <Button
+            android:id="@+id/dialog_ok_button"
+            style="@style/AppTheme.PrimaryButton.M"
+            android:background="@drawable/round_style"
+            android:layout_margin="@dimen/marginXL"
+            android:text="@string/accept"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_dialog_ok_body"
+            app:backgroundTint="@color/green"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>
